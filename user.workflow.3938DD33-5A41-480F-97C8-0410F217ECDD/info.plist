@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>florian.convert</string>
+	<key>category</key>
+	<string>Internet</string>
+	<key>connections</key>
+	<dict>
+		<key>3AC97BC7-B4D4-42AB-A95D-9F06B7F0DA07</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0B15F93C-F24D-4A2B-BE21-D553DEA3063A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>09537431-99F7-47F3-B0A0-318E63B98530</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>77EA7E5C-A9B6-4646-B62F-2ACA3CB58EC8</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>0B15F93C-F24D-4A2B-BE21-D553DEA3063A</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>09537431-99F7-47F3-B0A0-318E63B98530</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Florian Pellet</string>
+	<key>description</key>
+	<string>Find exchange rate using Google Finance Currency Converter</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Currency Converter 20180624</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>63</integer>
+				<key>keyword</key>
+				<string>eur</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>script</key>
+				<string>AMOUNT={query}
+
+resp=`curl -s "https://free.currencyconverterapi.com/api/v5/convert?q=EUR_JPY&amp;compact=ultra"`
+v1=`echo $resp | cut -c 12-21`
+v2=`echo "scale=3; $v1 * $AMOUNT" | bc`
+RESULT=`printf "%s EUR = %1.2f JPY" $AMOUNT $v2`
+
+echo '&lt;?xml version="1.0"?&gt;&lt;items&gt;
+            &lt;item uid="convert" arg="'$RESULT'"&gt;
+                &lt;title&gt;'$RESULT'&lt;/title&gt;
+                &lt;icon&gt;icon.png&lt;/icon&gt;
+                &lt;subtitle&gt;&lt;/subtitle&gt;
+            &lt;/item&gt;
+        &lt;/items&gt;'</string>
+				<key>title</key>
+				<string>Convert € to ¥</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>77EA7E5C-A9B6-4646-B62F-2ACA3CB58EC8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string></string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>0B15F93C-F24D-4A2B-BE21-D553DEA3063A</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>output</key>
+				<integer>0</integer>
+				<key>removeextension</key>
+				<false/>
+				<key>sticky</key>
+				<false/>
+				<key>text</key>
+				<string>{query}</string>
+				<key>title</key>
+				<string>Result copied to clipboard.</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>09537431-99F7-47F3-B0A0-318E63B98530</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>127</integer>
+				<key>keyword</key>
+				<string>usd</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>script</key>
+				<string>AMOUNT={query}
+
+resp=`curl -s "https://free.currencyconverterapi.com/api/v5/convert?q=USD_JPY&amp;compact=ultra"`
+v1=`echo $resp | cut -c 12-21`
+v2=`echo "scale=3; $v1 * $AMOUNT" | bc`
+RESULT=`printf "%s USD = %1.2f JPY" $AMOUNT $v2`
+
+echo '&lt;?xml version="1.0"?&gt;&lt;items&gt;
+            &lt;item uid="convert" arg="'$RESULT'"&gt;
+                &lt;title&gt;'$RESULT'&lt;/title&gt;
+                &lt;icon&gt;icon.png&lt;/icon&gt;
+                &lt;subtitle&gt;&lt;/subtitle&gt;
+            &lt;/item&gt;
+        &lt;/items&gt;'</string>
+				<key>title</key>
+				<string>Convert $ to ¥</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>3AC97BC7-B4D4-42AB-A95D-9F06B7F0DA07</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>mod by hidsh 2018/6/24</string>
+	<key>uidata</key>
+	<dict>
+		<key>09537431-99F7-47F3-B0A0-318E63B98530</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>0B15F93C-F24D-4A2B-BE21-D553DEA3063A</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+		<key>3AC97BC7-B4D4-42AB-A95D-9F06B7F0DA07</key>
+		<dict>
+			<key>ypos</key>
+			<real>250</real>
+		</dict>
+		<key>77EA7E5C-A9B6-4646-B62F-2ACA3CB58EC8</key>
+		<dict>
+			<key>ypos</key>
+			<real>130</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>
