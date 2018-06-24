@@ -1,11 +1,11 @@
-Currency Converter workflow for Alfred v2
+Currency Converter Kai workflow for Alfred v2
 ====
 
 ![screenshot](./cc_screenshot.png)
 
 ## Environment
 
-tested on Alfred v2, MacOS Sierra
+Tested on Alfred v2, MacOS Sierra
 
 ## Usage
 
@@ -15,10 +15,14 @@ But for now,  this tool only supports JPY from the USD and the EUR. Other conver
 
 ## Install
 
-Download zip and unzip it, then drag n' drop `Currency Converter Kai.alfredworkflow` file to the Workflows pane of the Alfred Preferences window.
+Download [zip](https://github.com/gnrr/Currency_Converter_for_Alfred_v2/releases) and unzip it, then drag n' drop `Currency Converter Kai.alfredworkflow` file to the Workflows pane of the Alfred Preferences window.
 
 ## Author
 
 This workflow is based on [this code](http://cl.ly/MBJ8) written by _John Doe_ at [CloudApp](https://www.getcloudapp.com/).
 
-Thanks.
+
+## Thanks
+
+[currencyconverterapi.com](https://free.currencyconverterapi.com/)
+
